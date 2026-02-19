@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
 
         :root {
             --primary: #2563eb;
@@ -22,8 +22,16 @@
         body {
             background: var(--bg);
             color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            line-height: 1.8;
             scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, .logo, .nav-link, .nav-item, button, .section-label, th, .stat-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
         }
 
         .light-card {
@@ -54,6 +62,15 @@
         code {
             color: var(--primary);
             font-weight: 600;
+            font-family: monospace;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        .academic-text {
+            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -62,15 +79,15 @@
 
     <nav class="fixed w-full z-50 nav-blur px-8 py-4 flex justify-between items-center">
         <div class="flex flex-col">
-            <span class="text-xl font-black text-slate-900 uppercase tracking-tighter">TABBED<span
+            <span class="text-xl font-black text-slate-900 uppercase tracking-tighter logo">TABBED<span
                     class="text-blue-600 italic">-IN</span></span>
-            <span class="text-[9px] text-blue-600 font-bold uppercase tracking-[0.2em]">PBL II</span>
+            <span class="text-[9px] text-blue-600 font-bold uppercase tracking-[0.2em] section-label">PBL II</span>
         </div>
         <div class="hidden md:flex gap-8 text-[11px] uppercase tracking-widest font-extrabold text-slate-500">
-            <a href="#problem" class="hover:text-blue-600 transition">Problem</a>
-            <a href="#literature" class="hover:text-blue-600 transition">Literature</a>
-            <a href="#methodology" class="hover:text-blue-600 transition">Methodology</a>
-            <a href="#results" class="hover:text-blue-600 transition">Results</a>
+            <a href="#problem" class="hover:text-blue-600 transition nav-link">Problem</a>
+            <a href="#literature" class="hover:text-blue-600 transition nav-link">Literature</a>
+            <a href="#methodology" class="hover:text-blue-600 transition nav-link">Methodology</a>
+            <a href="#results" class="hover:text-blue-600 transition nav-link">Results</a>
         </div>
     </nav>
 
@@ -91,72 +108,72 @@
         </section>
 
         <section id="problem" class="space-y-16">
-    <div class="text-center">
-        <h2 class="text-3xl font-black text-slate-900 uppercase">Problem Statement</h2>
-        <p class="text-red-600 text-xs font-bold uppercase tracking-widest mt-2">The Challenge of the Fractured Workspace</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-8">
-            <div class="light-card p-8 border-l-8 border-red-500 bg-red-50/30">
-                <h3 class="text-lg font-black text-slate-900 mb-4 uppercase">The Core Technical Gap</h3>
-                <p class="text-slate-600 leading-relaxed text-justify text-sm">
-                    Modern browser architectures lack a <strong>Unified Real-Time State Layer</strong>. While vertical organization tools (like Sidebery) have improved local tab management, they remain isolated to single devices. Native synchronization protocols operate on high-latency <strong>Polling Cycles</strong>, creating a 15-minute "blind spot" that prevents power users from maintaining a seamless mental model across multiple machines.
-                </p>
+            <div class="text-center">
+                <h2 class="text-4xl font-black text-slate-900 uppercase">Problem Statement</h2>
+                <p class="text-red-600 text-sm font-bold uppercase tracking-widest mt-2">The Challenge of the Fractured Workspace</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-4">
-                <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <div class="text-red-500 mt-1"><i class="fas fa-exclamation-triangle"></i></div>
-                    <div>
-                        <h4 class="text-xs font-bold uppercase text-slate-800">Lack of Real-Time Backup</h4>
-                        <p class="text-[11px] text-slate-500">Session states are not backed up instantly; a browser crash on one device can result in total data loss before the next sync cycle.</p>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="light-card p-8 border-l-8 border-red-500 bg-red-50/30">
+                        <h3 class="text-xl font-black text-slate-900 mb-4 uppercase">The Core Problem</h3>
+                        <p class="text-slate-600 leading-relaxed text-justify academic-text">
+                            Modern browser architectures lack a <strong>Unified Real-Time State Layer</strong>. While vertical organization tools (like Sidebery) have improved local tab management, they remain isolated to single devices. Native synchronization protocols operate on high-latency <strong>Polling Cycles</strong>, creating a 15-minute "blind spot" that prevents power users from maintaining a seamless mental model across multiple machines.
+                        </p>
                     </div>
-                </div>
-                <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <div class="text-red-500 mt-1"><i class="fas fa-layer-group"></i></div>
-                    <div>
-                        <h4 class="text-xs font-bold uppercase text-slate-800">Organizational Fragmentation</h4>
-                        <p class="text-[11px] text-slate-500">No existing solution allows for "Mirrored" vs. "Unique" categorization of tabs across different device ecosystems.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="light-card p-10 bg-slate-50 relative overflow-hidden">
-            <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6">Power User Impact Analysis</h3>
-            <div class="space-y-6">
-                <div class="space-y-2">
-                    <div class="flex justify-between text-[10px] font-bold uppercase">
-                        <span>Context Switching Friction</span>
-                        <span class="text-red-600">High</span>
-                    </div>
-                    <div class="h-1.5 w-full bg-slate-200 rounded-full">
-                        <div class="h-full bg-red-500 w-4/5 rounded-full"></div>
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <div class="flex justify-between text-[10px] font-bold uppercase">
-                        <span>Multi-Device Workflow Continuity</span>
-                        <span class="text-red-600">Broken</span>
-                    </div>
-                    <div class="h-1.5 w-full bg-slate-200 rounded-full">
-                        <div class="h-full bg-red-500 w-full rounded-full"></div>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                            <div class="text-red-500 mt-1"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div>
+                                <h4 class="text-xs font-bold uppercase text-slate-800">Lack of Real-Time Backup</h4>
+                                <p class="text-sm text-slate-500">Session states are not backed up instantly; a browser crash on one device can result in total data loss before the next sync cycle.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                            <div class="text-red-500 mt-1"><i class="fas fa-layer-group"></i></div>
+                            <div>
+                                <h4 class="text-xs font-bold uppercase text-slate-800">Organizational Fragmentation</h4>
+                                <p class="text-sm text-slate-500">No existing solution allows for "Mirrored" vs. "Unique" categorization of tabs across different device ecosystems.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p class="text-[12px] text-slate-500 italic leading-relaxed pt-4 border-t border-slate-200">
-                    "For Power Users—researchers, developers, and students—the inability to see 'Unique Tabs' from a remote PC or instantly 'Mirror' a workspace results in a cumulative loss of productivity and cognitive momentum."
-                </p>
+
+                <div class="light-card p-10 bg-slate-50 relative overflow-hidden">
+                    <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6">Power User Impact Analysis</h3>
+                    <div class="space-y-6">
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-bold uppercase">
+                                <span>Context Switching Friction</span>
+                                <span class="text-red-600">High</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-200 rounded-full">
+                                <div class="h-full bg-red-500 w-4/5 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-bold uppercase">
+                                <span>Multi-Device Workflow Continuity</span>
+                                <span class="text-red-600">Broken</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-200 rounded-full">
+                                <div class="h-full bg-red-500 w-full rounded-full"></div>
+                            </div>
+                        </div>
+                        <p class="text-base text-slate-500 italic leading-relaxed pt-4 border-t border-slate-200">
+                            "For Power Users—researchers, developers, and students—the inability to see 'Unique Tabs' from a remote PC or instantly 'Mirror' a workspace results in a cumulative loss of productivity and cognitive momentum."
+                        </p>
+                    </div>
+                    <i class="fas fa-user-gear absolute -bottom-4 -right-4 text-8xl text-slate-200/50"></i>
+                </div>
             </div>
-            <i class="fas fa-user-gear absolute -bottom-4 -right-4 text-8xl text-slate-200/50"></i>
-        </div>
-    </div>
-</section>
+        </section>
 
         <section id="literature" class="space-y-20">
             <div class="text-center">
-                <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tight">Literature Review</h2>
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-2">Comparison of
+                <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tight">Literature Review</h2>
+                <p class="text-slate-500 text-sm font-bold uppercase tracking-widest mt-2">Comparison of
                     Synchronization Alternatives</p>
             </div>
 
@@ -166,27 +183,27 @@
                         <thead>
                             <tr class="bg-slate-50/50">
                                 <th
-                                    class="p-6 text-[10px] font-black uppercase text-slate-400 border-b border-slate-100">
+                                    class="p-6 text-xs font-black uppercase text-slate-400 border-b border-slate-100">
                                     Metric</th>
                                 <th
-                                    class="p-6 text-[10px] font-black uppercase text-slate-400 border-b border-slate-100">
+                                    class="p-6 text-xs font-black uppercase text-slate-400 border-b border-slate-100">
                                     Native Firefox Sync</th>
                                 <th
-                                    class="p-6 text-[10px] font-black uppercase text-slate-400 border-b border-slate-100">
+                                    class="p-6 text-xs font-black uppercase text-slate-400 border-b border-slate-100">
                                     Sidebery / TST</th>
                                 <th
-                                    class="p-6 text-[10px] font-black uppercase text-slate-400 border-b border-slate-100 bg-blue-50/50">
+                                    class="p-6 text-xs font-black uppercase text-slate-400 border-b border-slate-100 bg-blue-50/50">
                                     Tabbed-In (Ours)</th>
                             </tr>
                         </thead>
-                        <tbody class="text-sm">
+                        <tbody class="text-base">
                             <tr>
                                 <td class="p-6 font-bold border-b border-slate-50">Sync Latency</td>
                                 <td class="p-6 text-red-500 font-medium border-b border-slate-50">High (600s - 1200s)
                                 </td>
                                 <td class="p-6 text-slate-400 border-b border-slate-50">None (Local Only)</td>
                                 <td class="p-6 text-green-600 font-black border-b border-slate-50 bg-blue-50/30">
-                                    Ultra-Low (<0.5s)< /td>
+                                    Ultra-Low (<0.5s) </td>
                             </tr>
                             <tr>
                                 <td class="p-6 font-bold border-b border-slate-50">Architecture</td>
@@ -220,7 +237,7 @@
                     </div>
                     <h4 class="font-black text-xs uppercase tracking-widest text-slate-400">01. Native Sync Services
                     </h4>
-                    <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                    <p class="text-sm text-slate-600 leading-relaxed text-justify academic-text">
                         Native solutions prioritize <strong>resource conservation</strong>. By employing a "Pull" logic,
                         the browser only checks for updates at intervals. While sufficient for data redundancy (backup),
                         it fails to facilitate live "handoff" scenarios where a user requires immediate access to a
@@ -234,10 +251,8 @@
                         <i class="fas fa-align-left"></i>
                     </div>
                     <h4 class="font-black text-xs uppercase tracking-widest text-slate-400">02. Vertical Organizers</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed text-justify">
-                        Extensions like <em>Sidebery</em> revolutionize <strong>Spatial HCI</strong> (Human-Computer
-                        Interaction). They solve the "Tab Overload" problem vertically. However, they lack a networked
-                        state reconciliation engine, meaning the organization remains trapped on a single machine.
+                    <p class="text-sm text-slate-600 leading-relaxed text-justify academic-text">
+                        Extensions like <em>Sidebery</em> solve the "Tab Overload" problem vertically. However, they lack a networked state reconciliation engine, meaning the organization remains trapped on a single machine.
                     </p>
                 </div>
 
@@ -247,7 +262,7 @@
                         <i class="fas fa-archive"></i>
                     </div>
                     <h4 class="font-black text-xs uppercase tracking-widest text-slate-400">03. Session Archivers</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                    <p class="text-sm text-slate-600 leading-relaxed text-justify academic-text">
                         Tools like <em>OneTab</em> focus on <strong>Memory Optimization</strong>. They suspend tabs into
                         static lists to save RAM. While effective for storage, they do not support the active,
                         bi-directional state mirroring required for modern multi-device workflows.
@@ -260,14 +275,14 @@
                         class="text-blue-200">Push vs. Pull</span></h3>
                 <div class="grid md:grid-cols-2 gap-12">
                     <div class="space-y-4">
-                        <p class="text-sm text-blue-100 leading-relaxed text-justify">
+                        <p class="text-base text-blue-100 leading-relaxed text-justify">
                             Our literature review identified the <strong>Push-Response bottleneck</strong> as the
                             primary research gap. Most systems wait for a request before delivering data.
                         </p>
-                        <p class="text-sm text-blue-100 leading-relaxed text-justify">
+                        <p class="text-base text-blue-100 leading-relaxed text-justify">
                             <strong>Tabbed-In</strong> utilizes the <strong>WebSocket (RFC 6455)</strong> protocol.
                             Unlike HTTP polling, WebSockets provide a full-duplex communication channel. When Device A
-                            triggers an <code>onCreated</code> event, the server "pushes" that state to all listeners
+                            triggers an onCreated event, the server "pushes" that state to all listeners
                             instantly, removing the client-side wait time entirely.
                         </p>
                     </div>
@@ -286,36 +301,11 @@
             </div>
         </section>
 
-        <section class="light-card p-12 bg-blue-600 text-white overflow-hidden relative">
-            <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-black uppercase mb-6">Innovation <span class="text-blue-200">Gap</span>
-                    </h2>
-                    <p class="text-blue-100 leading-relaxed mb-8">
-                        Most extensions ask the server for updates (Pull). <strong>Tabbed-In</strong> tells the server
-                        to shout updates (Push).
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4 bg-white/10 p-4 rounded-xl">
-                            <i class="fas fa-bolt"></i>
-                            <span class="text-sm font-bold">Supabase Realtime WebSocket Integration</span>
-                        </div>
-                        <div class="flex items-center gap-4 bg-white/10 p-4 rounded-xl">
-                            <i class="fas fa-database"></i>
-                            <span class="text-sm font-bold">BYOB (Bring Your Own Backend) Architecture</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden md:flex justify-center">
-                    <i class="fas fa-rocket text-[12rem] text-white/10 rotate-12"></i>
-                </div>
-            </div>
-        </section>
 
         <section id="methodology" class="space-y-16">
             <div class="text-center">
-                <h2 class="text-3xl font-black text-slate-900 uppercase">System Methodology</h2>
-                <p class="text-blue-600 text-xs font-bold uppercase tracking-widest mt-2">The Logic Architecture of
+                <h2 class="text-4xl font-black text-slate-900 uppercase">System Methodology</h2>
+                <p class="text-blue-600 text-sm font-bold uppercase tracking-widest mt-2">The Logic Architecture of
                     Tabbed-In</p>
             </div>
 
@@ -323,30 +313,30 @@
                 <div class="grid md:grid-cols-3 gap-8 text-center relative">
                     <div class="space-y-4">
                         <div
-                            class="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg">
-                            <i class="fas fa-satellite"></i></div>
-                        <h4 class="font-bold text-slate-800 text-sm">1. Event Interception</h4>
-                        <p class="text-xs text-slate-500 px-4">Background scripts monitor <code>onUpdated</code> and
+                            class="w-14 h-14 bg-blue-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg">
+                            <i class="fas fa-satellite text-xl"></i></div>
+                        <h4 class="font-bold text-slate-800 text-base">1. Event Interception</h4>
+                        <p class="text-sm text-slate-500 px-4">Background scripts monitor <code>onUpdated</code> and
                             <code>onRemoved</code> hooks. When a tab state changes, the extension captures the URL,
                             Title, and unique Window ID.</p>
                     </div>
 
                     <div class="space-y-4">
                         <div
-                            class="w-12 h-12 bg-purple-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg">
-                            <i class="fas fa-broadcast-tower"></i></div>
-                        <h4 class="font-bold text-slate-800 text-sm">2. State Serialization</h4>
-                        <p class="text-xs text-slate-500 px-4">Captured data is serialized into a JSON payload including
+                            class="w-14 h-14 bg-purple-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg">
+                            <i class="fas fa-broadcast-tower text-xl"></i></div>
+                        <h4 class="font-bold text-slate-800 text-base">2. State Serialization</h4>
+                        <p class="text-sm text-slate-500 px-4">Captured data is serialized into a JSON payload including
                             a <code>timestamp</code> and <code>origin_device_id</code>. This is broadcasted via Supabase
                             WebSockets using a "Push" pattern.</p>
                     </div>
 
                     <div class="space-y-4">
                         <div
-                            class="w-12 h-12 bg-green-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg">
-                            <i class="fas fa-sync-alt"></i></div>
-                        <h4 class="font-bold text-slate-800 text-sm">3. State Reconciliation</h4>
-                        <p class="text-xs text-slate-500 px-4">Remote devices receive the payload and compare it against
+                            class="w-14 h-14 bg-green-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg">
+                            <i class="fas fa-sync-alt text-xl"></i></div>
+                        <h4 class="font-bold text-slate-800 text-base">3. State Reconciliation</h4>
+                        <p class="text-sm text-slate-500 px-4">Remote devices receive the payload and compare it against
                             their local <code>browser.tabs.query</code> results. It triggers execution only if a delta
                             (difference) is detected to prevent infinite loops.</p>
                     </div>
@@ -355,8 +345,8 @@
 
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="light-card p-8">
-                    <h3 class="text-blue-600 font-bold text-xs uppercase tracking-widest mb-4">Concurrency Handling</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
+                    <h3 class="text-blue-600 font-bold text-sm uppercase tracking-widest mb-4">Concurrency Handling</h3>
+                    <p class="text-base text-slate-600 leading-relaxed academic-text">
                         To prevent <strong>Race Conditions</strong> where two devices update the same tab
                         simultaneously, Tabbed-In utilizes a <strong>Last-Write-Wins (LWW)</strong> approach. Each
                         broadcast carries a high-resolution UTC timestamp; receiving clients only execute updates if the
@@ -364,9 +354,9 @@
                     </p>
                 </div>
                 <div class="light-card p-8">
-                    <h3 class="text-purple-600 font-bold text-xs uppercase tracking-widest mb-4">The Persistence Layer
+                    <h3 class="text-purple-600 font-bold text-sm uppercase tracking-widest mb-4">The Persistence Layer
                     </h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
+                    <p class="text-base text-slate-600 leading-relaxed academic-text">
                         While Realtime handles the active "shouting" of updates, the <strong>Session Snapshot</strong>
                         feature uses PostgreSQL transactions. This ensures that even if a device is offline, it can
                         fetch the latest "Mirrored" state from the database upon reconnection, reconciling the missed
@@ -376,60 +366,80 @@
             </div>
         </section>
 
+
         <section id="results" class="light-card p-12">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-black text-slate-900 uppercase">Results & Analysis</h2>
+                <h2 class="text-4xl font-black text-slate-900 uppercase">Results & Analysis</h2>
             </div>
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="space-y-8">
                     <div>
-                        <div class="flex justify-between text-[10px] font-black uppercase text-slate-400 mb-2">
+                        <div class="flex justify-between text-xs font-black uppercase text-slate-400 mb-2">
                             <span>Firefox Sync (Standard)</span>
                             <span class="text-red-500">900s Delay</span>
                         </div>
-                        <div class="h-3 bg-slate-100 rounded-full">
+                        <div class="h-4 bg-slate-100 rounded-full">
                             <div class="h-full bg-red-400 rounded-full w-full"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-[10px] font-black uppercase text-slate-400 mb-2">
+                        <div class="flex justify-between text-xs font-black uppercase text-slate-400 mb-2">
                             <span>Tabbed-In (Real-time)</span>
                             <span class="text-blue-600">0.45s Delay</span>
                         </div>
-                        <div class="h-3 bg-slate-100 rounded-full">
+                        <div class="h-4 bg-slate-100 rounded-full">
                             <div class="h-full bg-blue-600 rounded-full w-1"></div>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 italic">Analysis: By implementing a Push-based architecture,
+                    <p class="text-base text-slate-500 italic">Analysis: By implementing a Push-based architecture,
                         Tabbed-In achieves a <strong>99.95% reduction</strong> in sync latency compared to industry
                         baselines.</p>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="light-card p-6 text-center border-b-4 border-blue-500">
-                        <span class="block text-3xl font-black text-slate-900">2000x</span>
-                        <span class="text-[9px] uppercase font-bold text-slate-400">Speed Multiplier</span>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="light-card p-6 border-b-4 border-blue-500">
+                        <span class="block text-4xl font-black text-slate-900 stat-value">2000x</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 section-label">Speed Multiplier</span>
                     </div>
-                    <div class="light-card p-6 text-center border-b-4 border-purple-500">
-                        <span class="block text-3xl font-black text-slate-900">100%</span>
-                        <span class="text-[9px] uppercase font-bold text-slate-400">User Privacy</span>
+                    <div class="light-card p-6 border-b-4 border-purple-500">
+                        <span class="block text-4xl font-black text-slate-900 stat-value">100%</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 section-label">User Privacy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="conclusion" class="light-card p-16 bg-slate-900 text-white border-none text-center">
+            <div class="max-w-3xl mx-auto space-y-10">
+                <h2 class="text-5xl font-black uppercase tracking-tight">Project Conclusion</h2>
+                <p class="text-xl text-slate-400 leading-relaxed text-justify">
+                    <strong>Tabbed-In</strong> provides a novel solution to the fractured workspace problem. By combining real-time WebSocket communication with a privacy-focused BYOB model, the system empowers power users to maintain a synchronized, categorized, and backed-up browsing environment across all devices without the latency of traditional synchronization protocols.
+                </p>
+                <div class="pt-10 flex flex-wrap justify-center gap-12">
+                    <div class="text-left border-l-4 border-blue-500 pl-6">
+                        <span class="section-label text-blue-400 text-[10px] uppercase font-bold">Primary Outcome</span>
+                        <span class="block text-xl font-bold mt-1 nav-item">Seamless Context Mobility</span>
+                    </div>
+                    <div class="text-left border-l-4 border-green-500 pl-6">
+                        <span class="section-label text-green-400 text-[10px] uppercase font-bold">Security Model</span>
+                        <span class="block text-xl font-bold mt-1 nav-item">Decentralized BYOB</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="team" class="pt-20 border-t border-slate-200 text-center space-y-12">
-            <h2 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.5em]">Academic Credits</h2>
+            <h2 class="text-[12px] font-black text-slate-400 uppercase tracking-[0.5em] section-label">Academic Credits</h2>
             <div class="flex flex-wrap justify-center gap-8">
                 <div class="light-card px-12 py-8 min-w-[300px]">
-                    <span class="text-[9px] font-bold text-blue-600 uppercase tracking-widest block mb-1">Project
+                    <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest block mb-1 section-label">Project
                         Guide</span>
-                    <p class="text-xl font-black text-slate-900">Madhu Sharma</p>
+                    <p class="text-2xl font-black text-slate-900 logo">Madhu Sharma</p>
 
                 </div>
                 <div class="light-card px-12 py-8 min-w-[300px]">
                     <span
-                        class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Developer</span>
-                    <p class="text-xl font-black text-slate-900">Jayant Soni</p>
+                        class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1 section-label">Developer</span>
+                    <p class="text-2xl font-black text-slate-900 logo">Jayant Soni</p>
 
                 </div>
             </div>
@@ -438,7 +448,7 @@
     </main>
 
     <footer class="py-12 text-center bg-slate-50 border-t border-slate-200">
-        <p class="text-slate-400 text-[10px] font-bold tracking-[0.3em] uppercase">Manipal University Jaipur • 2026</p>
+        <p class="text-slate-400 text-[10px] font-bold tracking-[0.3em] uppercase section-label">Manipal University Jaipur • 2026</p>
     </footer>
 
 </body>
