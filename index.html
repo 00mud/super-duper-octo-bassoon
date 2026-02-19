@@ -78,7 +78,7 @@
                 Real-time <br><span class="gradient-text">Tab Mirroring</span>
             </h1>
             <p class="text-slate-500 max-w-2xl mx-auto italic text-lg leading-relaxed border-l-4 border-blue-500 pl-6 text-left">
-                "Hypothesis: Browser productivity is throttled by high-latency synchronization. Tabbed-In proves that sub-second mirroring significantly reduces context-switching friction."
+                "Instantaneous, single-click session mirroring."
             </p>
         </section>
 
@@ -95,10 +95,7 @@
                         <span class="block text-[10px] uppercase font-black text-red-400">Current Latency</span>
                         <span class="text-2xl font-bold text-red-600">~15.0m</span>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-2xl flex-1 border border-slate-200">
-                        <span class="block text-[10px] uppercase font-black text-slate-400">User Friction</span>
-                        <span class="text-2xl font-bold text-slate-700">Critical</span>
-                    </div>
+                    
                 </div>
             </div>
             <div class="light-card h-80 flex items-center justify-center bg-slate-50">
@@ -154,26 +151,49 @@
             </div>
         </section>
 
-        <section id="methodology" class="space-y-12">
-            <h2 class="text-3xl font-black text-center text-slate-900 uppercase">System Methodology</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center space-y-4">
-                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto text-xl shadow-sm">1</div>
-                    <h4 class="font-black text-xs uppercase text-slate-400">Event Monitoring</h4>
-                    <p class="text-sm text-slate-600">Background scripts utilize <code>browser.tabs</code> API to intercept state changes.</p>
-                </div>
-                <div class="text-center space-y-4">
-                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto text-xl shadow-sm">2</div>
-                    <h4 class="font-black text-xs uppercase text-slate-400">WebSocket Push</h4>
-                    <p class="text-sm text-slate-600">Broadcast updates to peer devices via <strong>Supabase Realtime</strong> in <500ms.</p>
-                </div>
-                <div class="text-center space-y-4">
-                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-xl shadow-sm">3</div>
-                    <h4 class="font-black text-xs uppercase text-slate-400">Sidebery UI</h4>
-                    <p class="text-sm text-slate-600">Reactive DOM updates using CSS Flexbox for "Mirrored" vs "Unique" categorization.</p>
-                </div>
+        <section id="methodology" class="space-y-16">
+    <div class="text-center">
+        <h2 class="text-3xl font-black text-slate-900 uppercase">System Methodology</h2>
+        <p class="text-blue-600 text-xs font-bold uppercase tracking-widest mt-2">The Logic Architecture of Tabbed-In</p>
+    </div>
+
+    <div class="light-card p-12 bg-slate-50 border-dashed border-2 border-slate-200">
+        <div class="grid md:grid-cols-3 gap-8 text-center relative">
+            <div class="space-y-4">
+                <div class="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg"><i class="fas fa-satellite"></i></div>
+                <h4 class="font-bold text-slate-800 text-sm">1. Event Interception</h4>
+                <p class="text-xs text-slate-500 px-4">Background scripts monitor <code>onUpdated</code> and <code>onRemoved</code> hooks. When a tab state changes, the extension captures the URL, Title, and unique Window ID.</p>
             </div>
-        </section>
+            
+            <div class="space-y-4">
+                <div class="w-12 h-12 bg-purple-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg"><i class="fas fa-broadcast-tower"></i></div>
+                <h4 class="font-bold text-slate-800 text-sm">2. State Serialization</h4>
+                <p class="text-xs text-slate-500 px-4">Captured data is serialized into a JSON payload including a <code>timestamp</code> and <code>origin_device_id</code>. This is broadcasted via Supabase WebSockets using a "Push" pattern.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="w-12 h-12 bg-green-600 text-white rounded-lg flex items-center justify-center mx-auto shadow-lg"><i class="fas fa-sync-alt"></i></div>
+                <h4 class="font-bold text-slate-800 text-sm">3. State Reconciliation</h4>
+                <p class="text-xs text-slate-500 px-4">Remote devices receive the payload and compare it against their local <code>browser.tabs.query</code> results. It triggers execution only if a delta (difference) is detected to prevent infinite loops.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="light-card p-8">
+            <h3 class="text-blue-600 font-bold text-xs uppercase tracking-widest mb-4">Concurrency Handling</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+                To prevent <strong>Race Conditions</strong> where two devices update the same tab simultaneously, Tabbed-In utilizes a <strong>Last-Write-Wins (LWW)</strong> approach. Each broadcast carries a high-resolution UTC timestamp; receiving clients only execute updates if the incoming timestamp is newer than the last known local state for that specific tab ID.
+            </p>
+        </div>
+        <div class="light-card p-8">
+            <h3 class="text-purple-600 font-bold text-xs uppercase tracking-widest mb-4">The Persistence Layer</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+                While Realtime handles the active "shouting" of updates, the <strong>Session Snapshot</strong> feature uses PostgreSQL transactions. This ensures that even if a device is offline, it can fetch the latest "Mirrored" state from the database upon reconnection, reconciling the missed events during the offline period.
+            </p>
+        </div>
+    </div>
+</section>
 
         <section id="results" class="light-card p-12">
             <div class="text-center mb-12">
@@ -220,12 +240,12 @@
                 <div class="light-card px-12 py-8 min-w-[300px]">
                     <span class="text-[9px] font-bold text-blue-600 uppercase tracking-widest block mb-1">Project Guide</span>
                     <p class="text-xl font-black text-slate-900">Madhu Sharma</p>
-                    <p class="text-[10px] text-slate-500 uppercase mt-2">CSE Department, MUJ</p>
+                    
                 </div>
                 <div class="light-card px-12 py-8 min-w-[300px]">
-                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Lead Developer</span>
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Developer</span>
                     <p class="text-xl font-black text-slate-900">Jayant Soni</p>
-                    <p class="text-[10px] text-slate-500 uppercase mt-2">Reg No: 2427030573</p>
+                    
                 </div>
             </div>
         </section>
@@ -238,3 +258,4 @@
 
 </body>
 </html>
+
